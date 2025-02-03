@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <string.h>
+struct user{
+    char name[10];
+    char pass[7];
+    int balance;
+    int deposit[10];
+    int withdraw[10];
+}user1={"Thulasi","260705",0};
+int d_i=0,w_i=0;
+
+int pass(){
+ char pin[10];
+ int i=0;
+ char ch;
+ scanf("%s",pin);
+ if(strcmp(pin,user1.pass)==0){
+     printf("\nwelcome %s",user1.name);
+     return 1;
+ }
+ else
+  return 0;
+}
+
+void Deposit(){
+ printf("\nPlease enter your password:");
+    if(pass()){
+     printf("\nEnter your Deposite number");
+     int dep;
+     scanf("%d",&dep);
+     user1.balance+=dep;
+     user1.deposit[d_i++]=dep;
+     printf("\nyour deposit is successful");
+     }
+}
+void withdraw(){
+ printf("\nPlease enter your password:");
+     if(pass()){
+     printf("\nEnter your Withdraw number");
+     int withd;
+     scanf("%d",&withd);
+     user1.balance-=withd;
+     if(withd<=user1.balance){
+     user1.deposit[d_i++]=withd;
+     printf("\nyour Withdraw is successful");
+     }
+     else 
+     printf("Sorry your balance is not enough to do your withdraw");
+     }
+}
+void Balance_Enquiry(){
+    if(pass()){
+    printf("Checking your balance...");
+    printf("Your balance is %d",user1.balance);
+    }
+}
+void Transaction_History(){
+    printf("Your Transaction History");
+    printf("Your deposits:\t\t\t\t\t\tYour withdraws");
+    for(int i=0;i<d_i||i<w_i;i++){
+    printf("%d \t\t\t\t\t\t %d",user1.deposit[d_i++],user1.withdraw[w_i]);
+}
+}
+void Pin_change(){
+    printf("Please enter your old pin");
+    if(pass()){
+        scanf("%s",user1.pass);
+    }
+    else 
+    printf("Please enter your correct pin");
+}
+int main() {
+     
+    while(1){
+        printf("\n\n\n\t\t\t***************************");
+        printf("\n\t\t\t||  Welcome to ATM machine ||");
+        printf("\n\t\t\t***************************");
+        printf("\n\n\t1.Deposit");
+        printf("\n\t2.Withdraw");
+        printf("\n\t3.Balance Enquiry");
+        printf("\n\t4.Transaction History");
+        printf("\n\t5.Pin change");
+        printf("\n\t6.Exit");
+        printf("\nPlease enter your choice:");
+        int ch;
+        scanf("%d",&ch);
+        switch(ch){
+            case 1 : Deposit();
+                     break;
+            case 2 : withdraw();
+                     break;
+            case 3 : Balance_Enquiry();
+                     break;
+            case 4 : Transaction_History();
+                     break;
+           case 5 : Pin_change();
+                     break;
+            case 6 : return 0;
+        }
+        
+    }
+
+    return 0;
+}
+
