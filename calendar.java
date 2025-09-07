@@ -1,0 +1,109 @@
+import java.util.Scanner;
+import java.util.Calendar;
+
+public class calendar {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter Month value:");
+        int mm = sc.nextInt();
+
+        System.out.println("Enter Year value:");
+        int yy = sc.nextInt();
+
+        printcalendar(mm,yy);
+
+        sc.close();
+
+    }
+
+ static void printcalendar(int mm, int yy){
+
+     System.out.println("             "+getmonth(mm)+" "+ yy);
+     System.out.println();
+
+     System.out.printf("%5s%5s%5s%5s%5s%5s%5s ",
+     "SUN",
+             "MON",
+             "TUE",
+             "WED",
+             "THU",
+             "FRI",
+             "SAT");
+
+     System.out.println();
+     System.out.println("  ---------------------------------");
+     System.out.println();
+
+     Calendar calander = Calendar.getInstance();
+
+     calander.set(Calendar.YEAR,yy);
+     calander.set(Calendar.MONTH,mm-1);
+     calander.set(Calendar.DAY_OF_MONTH,1);
+
+     int daycount=1;
+
+     int week = calander.get(Calendar.DAY_OF_WEEK);
+
+     for(int i=1;i<week;i++){
+
+        System.out.printf("%5s"," ");
+        daycount++;
+
+     }
+
+     for(int i=1;i<=daysofmonth(mm,yy);i++){
+
+        System.out.printf("%5s",i);
+
+        if(daycount%7 == 0){
+
+            System.out.println();
+
+        }
+
+        daycount++;
+
+     }
+
+     System.out.println();
+
+     };
+
+ 
+static String getmonth(int mm){
+
+   String a[] = {"0",
+                "JANUARY",
+                "FEBRUARY",
+                "MARCH",
+                "APRIL",
+                "MAY",
+                "JUNE",
+                "JULY",
+                "AUGUST",
+                "SEPTEMBER",
+                "OCTOBER",
+                "NOVENBER",
+                "DECEMBER"};
+
+     return a[mm];
+
+}
+
+static int daysofmonth(int mm,int yy){
+
+    int m[]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+    if(yy%4 == 0 && yy%100 == 0 || yy % 400 == 0){
+
+        m[2] = 29;
+
+    }
+
+    return m[mm];
+
+ }
+
+}
